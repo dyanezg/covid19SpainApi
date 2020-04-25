@@ -30,6 +30,15 @@ public class DbConfig {
 @Configuration
 @Profile("local")
 @PropertySource("classpath:application-local.properties")
-class BDSqLiteConfig {
+class BDSqLiteConfigLocal {
 }  
+
+
+@Configuration
+@Profile("pro")
+@PropertySource("classpath:application-pro.properties")
+class BDSqLiteConfigPro {
+}  
+
+
 }
