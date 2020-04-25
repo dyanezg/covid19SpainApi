@@ -10,7 +10,7 @@ services:
     lb:
         image: dockercloud/haproxy
         ports:
-            - 80:80
+            - 80:9091
         links:
             - app
         volumes:
