@@ -51,7 +51,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 			//Remove null values
 			modeloAcumulativoDtoList.removeIf(o -> o.getCcaa() == null);
 			
-			jdbcModeloAcumulativoHistoricoRepository.inertAll();
+			jdbcModeloAcumulativoHistoricoRepository.insertAll();
 			
 			modeloAcumulativoIdCounter=0;
 			

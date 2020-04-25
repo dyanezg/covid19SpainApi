@@ -12,7 +12,7 @@ public class JdbcModeloACumulativoHistoricoRepositoryImpl implements JdbcModeloA
 	 private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void inertAll() {		
+	public void insertAll() {		
 		jdbcTemplate.execute("insert into modelo_acumulativo_historico (ccaa, fecha, casos, hospitalizados, uci, fallecidos, recuperados, fecha_importacion) select ccaa, fecha, casos, hospitalizados, uci, fallecidos, recuperados, fecha_importacion from modelo_acumulativo");					
 	}
 
