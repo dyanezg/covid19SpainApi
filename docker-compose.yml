@@ -18,6 +18,5 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
 volumes:
-        sqlite-db: 
-            name: sqlite-db
+        sqlite-db:
         
