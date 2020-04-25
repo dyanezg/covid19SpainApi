@@ -11,7 +11,7 @@ services:
     lb:
         image: dockercloud/haproxy
         ports:
-            - 80:80
+            - "80:80"
         network_mode: bridge    
         links:
             - app
@@ -19,5 +19,5 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
 volumes:
         sqlite-db: 
-					name:sqlite-db
+            name:sqlite-db
         
