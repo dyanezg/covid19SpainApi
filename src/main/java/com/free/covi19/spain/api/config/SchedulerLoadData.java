@@ -30,6 +30,7 @@ public class SchedulerLoadData {
 		try {
 			logger.info("INICIO - loadScheduleModeloAcumulativo");
 			lodaDataService.loadModeloAcumulativo(url);
+			emailService.senderEmial("IMPORTACION AUTOMATICA OK");
 			logger.info("FIN - loadScheduleModeloAcumulativo");
 		} catch (Exception e) {
 			emailService.senderEmial(e.getMessage());
