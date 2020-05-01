@@ -1,1 +1,11 @@
-dfdfasdfsd
+FREEAPICOVID19  - CHANGELOG
+=============================
+
+Version 1.0.RELEASE (29-04-2020)
+
+*core de recopilacion y procesamiento de datos
+*capa api rest Hateoas
+*datos de comunidades autonomas
+*modelo acumulativo https://datos.gob.es/
+
+

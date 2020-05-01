@@ -31,10 +31,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 	EmailService emailService;
 	
 	@Autowired
-	JdbcModeloAcumulativoRepository jdbcModeloAcumulativoRepository;
-	
-	@Autowired
-	JdbcModeloAcumulativoHistoricoRepository jdbcModeloAcumulativoHistoricoRepository;
+	JdbcModeloAcumulativoRepository jdbcModeloAcumulativoRepository;		
 
 	@Transactional(rollbackOn = { Exception.class })
 	public String loadModeloAcumulativo(String url) throws Exception {
@@ -42,6 +39,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 		List<ModeloAcumulativoDto> modeloAcumulativoDtoList = new ArrayList<ModeloAcumulativoDto>();
 
 		try {
+					
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"));
 			// skip the header of the csv
@@ -50,9 +48,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 
 			//Remove null values
 			modeloAcumulativoDtoList.removeIf(o -> o.getCcaa() == null);
-			
-			jdbcModeloAcumulativoHistoricoRepository.insertAll();
-			
+						
 			modeloAcumulativoIdCounter=0;
 			
 			jdbcModeloAcumulativoRepository.delelteAll();
