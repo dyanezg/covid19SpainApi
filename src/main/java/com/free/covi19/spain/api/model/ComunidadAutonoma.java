@@ -3,11 +3,16 @@ package com.free.covi19.spain.api.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class ComunidadAutonoma implements Serializable{
 
 	/**
@@ -27,8 +32,7 @@ public class ComunidadAutonoma implements Serializable{
     @OneToMany(mappedBy="comunidadAutonoma")
     private List<TestRealizados> testRealizados;
     
-     
-    
+         
 	public String getNombre() {
 		return nombre;
 	}

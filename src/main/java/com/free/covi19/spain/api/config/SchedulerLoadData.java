@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,10 @@ public class SchedulerLoadData {
 	Logger logger = Logger.getLogger("class SchedulerLoadData");
 
 	@Value("${url.acumulativo}")
-	private String url;
+	private String urlAcumulativo;
+
+	@Value("${url.test.realizados}")
+	private String urlTestRealizados;
 
 	@Autowired
 	EmailService emailService;
@@ -29,7 +33,7 @@ public class SchedulerLoadData {
 
 		try {
 			logger.info("INICIO - loadScheduleModeloAcumulativo");
-			lodaDataService.loadModeloAcumulativo(url);
+			lodaDataService.loadModeloAcumulativo(urlAcumulativo);
 			emailService.senderEmial("MODELO ACUMULATIVO IMPORTACION AUTOMATICA OK");
 			logger.info("FIN - loadScheduleModeloAcumulativo");
 		} catch (Exception e) {
@@ -37,13 +41,13 @@ public class SchedulerLoadData {
 		}
 
 	}
-	
+
 	@Scheduled(cron = "0 0 */7 * * *", zone = "Europe/Madrid")
 	public void loadScheduleTestRealizados() throws Exception {
 
 		try {
 			logger.info("INICIO - loadScheduleTestRealizados");
-			lodaDataService.loadModeloAcumulativo(url);
+			lodaDataService.loadModeloAcumulativo(urlTestRealizados);
 			emailService.senderEmial("TEST REALIZADOS IMPORTACION AUTOMATICA OK");
 			logger.info("FIN - loadScheduleTestRealizados");
 		} catch (Exception e) {
@@ -51,5 +55,5 @@ public class SchedulerLoadData {
 		}
 
 	}
-	
+
 }

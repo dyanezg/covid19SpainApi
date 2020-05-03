@@ -16,7 +16,7 @@ public class DbConfig {
   @Autowired
   private Environment env;
 
-	 @Bean
+	 @Bean 
 	    public DataSource dataSource() {
 	        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	        dataSource.setDriverClassName(env.getProperty("driverClassName"));
