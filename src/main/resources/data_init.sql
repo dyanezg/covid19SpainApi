@@ -8,7 +8,7 @@ VALUES
 ("CB", "Cantabria"),	
 ("CM", "Castilla-La Mancha"),	
 ("CL", "Castilla y León"),		
-("CT", "Cataluña"),	
+("CT", "Cataluña"),
 ("CE", "Ceuta"),	
 ("VC", "C. Valenciana"),	
 ("EX", "Extremadura"),	
@@ -18,7 +18,8 @@ VALUES
 ("MC", "Murcia"),	
 ("NC", "Navarra"),	
 ("PV", "País Vasco"),
-("RI", "La Rioja");
+("RI", "La Rioja"),
+("ES", "España");
 
 
 

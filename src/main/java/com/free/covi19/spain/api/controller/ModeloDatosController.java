@@ -25,9 +25,13 @@ public class ModeloDatosController {
 
 	 @Value("${url.acumulativo}")
 	 private String urlAcumulativo;
+	 
+	 
+	 @Value("${url.test.realizados}")
+	 private String urlTestRealizados;
 	
 	
-	   @GetMapping("/modeloAcumulativo")
+	   @GetMapping("/modeloAcumulativo")	   
 	    public String loadModeloAcumulativo()  {		   		  
 			try {															
 				return lodaDataService.loadModeloAcumulativo(urlAcumulativo);
@@ -36,5 +40,17 @@ public class ModeloDatosController {
 				return "ko";
 			}		  		 		  
 		  }
+	   
+	   
+
+	   @GetMapping("/testRealizados")	   
+	    public String loadTestRealizados()  {		   		  
+			try {															
+				return lodaDataService.loadTestCovid(urlTestRealizados);
+			} catch (Exception e) {
+				emailService.senderEmial(e.getMessage());
+				return "ko";
+			}		  		 		  
+		  } 
 	
 }

@@ -9,7 +9,10 @@ Version 1.0.RELEASE (29-04-2020)
 *modelo acumulativo https://datos.gob.es/
 
 
-Version 1.1.RELEASE (01-04-2020)
+Version 1.1.RELEASE (01-05-2020)
 
 *eliminamos historico de modelos
 
+Version 1.2.RELEASE (01-04-2020)
+
+*nuevo modelo test realizados https://github.com/datadista/datasets/

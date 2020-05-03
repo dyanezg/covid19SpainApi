@@ -24,17 +24,32 @@ public class SchedulerLoadData {
 	@Autowired
 	LoadDataService lodaDataService;
 
-	@Scheduled(cron = "0 0 */10 * * *", zone = "Europe/Madrid")
+	@Scheduled(cron = "0 0 */8 * * *", zone = "Europe/Madrid")
 	public void loadScheduleModeloAcumulativo() throws Exception {
 
 		try {
 			logger.info("INICIO - loadScheduleModeloAcumulativo");
 			lodaDataService.loadModeloAcumulativo(url);
-			emailService.senderEmial("IMPORTACION AUTOMATICA OK");
+			emailService.senderEmial("MODELO ACUMULATIVO IMPORTACION AUTOMATICA OK");
 			logger.info("FIN - loadScheduleModeloAcumulativo");
 		} catch (Exception e) {
 			emailService.senderEmial(e.getMessage());
 		}
 
 	}
+	
+	@Scheduled(cron = "0 0 */7 * * *", zone = "Europe/Madrid")
+	public void loadScheduleTestRealizados() throws Exception {
+
+		try {
+			logger.info("INICIO - loadScheduleTestRealizados");
+			lodaDataService.loadModeloAcumulativo(url);
+			emailService.senderEmial("TEST REALIZADOS IMPORTACION AUTOMATICA OK");
+			logger.info("FIN - loadScheduleTestRealizados");
+		} catch (Exception e) {
+			emailService.senderEmial(e.getMessage());
+		}
+
+	}
+	
 }

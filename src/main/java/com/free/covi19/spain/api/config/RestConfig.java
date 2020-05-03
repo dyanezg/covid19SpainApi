@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 
 import com.free.covi19.spain.api.model.ComunidadAutonoma;
 import com.free.covi19.spain.api.model.ModeloAcumulativo;
+import com.free.covi19.spain.api.model.TestRealizados;
 
 @Configuration
 public class RestConfig implements RepositoryRestConfigurer {
@@ -19,5 +20,6 @@ public class RestConfig implements RepositoryRestConfigurer {
         ExposureConfiguration config = repositoryRestConfiguration.getExposureConfiguration();
         config.forDomainType(ComunidadAutonoma.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
         config.forDomainType(ModeloAcumulativo.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+        config.forDomainType(TestRealizados.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
     }
 }

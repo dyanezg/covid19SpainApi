@@ -22,6 +22,11 @@ public class ComunidadAutonoma implements Serializable{
    
     @OneToMany(mappedBy="comunidadAutonoma")
     private List<ModeloAcumulativo> modeloAcumulativo;
+    
+    
+    @OneToMany(mappedBy="comunidadAutonoma")
+    private List<TestRealizados> testRealizados;
+    
      
     
 	public String getNombre() {
@@ -46,6 +51,15 @@ public class ComunidadAutonoma implements Serializable{
 
 	public void setModeloAcumulativo(List<ModeloAcumulativo> modeloAcumulativo) {
 		this.modeloAcumulativo = modeloAcumulativo;
+	}
+
+
+	public List<TestRealizados> getTestRealizados() {
+		return testRealizados;
+	}
+
+	public void setTestRealizados(List<TestRealizados> testRealizados) {
+		this.testRealizados = testRealizados;
 	}
 
 

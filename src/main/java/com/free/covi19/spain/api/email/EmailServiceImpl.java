@@ -22,8 +22,8 @@ public class EmailServiceImpl implements EmailService {
 				
 		   try {
 	            SimpleMailMessage message = new SimpleMailMessage();
-	            message.setFrom("david.yanez.garcia@freeapicovid19.ga");
-	            message.setTo("david.yanez.garcia@freeapicovid19.ga");
+	            message.setFrom("info@freeapicovid19.ga");
+	            message.setTo("info@freeapicovid19.ga");
 	            message.setSubject("MENSAJE API COVID19");
 	            message.setText(text);
 
