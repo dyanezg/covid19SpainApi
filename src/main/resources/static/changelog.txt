@@ -1,23 +1,24 @@
 FREEAPICOVID19  - CHANGELOG
+
 =============================
-
 Version 1.0.RELEASE (29-04-2020)
-
+=============================
 *core de recopilacion y procesamiento de datos
 *capa api rest Hateoas, spring data rest
 *datos de comunidades autonomas
 *modelo acumulativo https://datos.gob.es/
 
-
+=============================
 Version 1.1.RELEASE (30-04-2020)
-
+=============================
 *eliminamos historico de modelos
 
+=============================
 Version 1.2.RELEASE (01-05-2020)
-
+=============================
 *nuevo modelo test realizados -> https://github.com/datadista/datasets/
 
-
+=============================
 Version 1.2.3.RELEASE (02-05-2020)
-
+=============================
 * config Hibernate Second-Level Cache
