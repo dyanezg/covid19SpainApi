@@ -11,7 +11,7 @@
 
 	<groupId>com.free.covi19.spain.api</groupId>
 	<artifactId>covid19SpainApi</artifactId>
-	<version>1.2.RELSEASE</version>
+	<version>1.2.3.RELSEASE</version>
 	<name>covid19SpainApi</name>
 	<description>Free Api Covid19 Spain</description>
 
