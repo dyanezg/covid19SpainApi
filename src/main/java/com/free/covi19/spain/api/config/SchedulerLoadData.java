@@ -47,7 +47,7 @@ public class SchedulerLoadData {
 
 		try {
 			logger.info("INICIO - loadScheduleTestRealizados");
-			lodaDataService.loadModeloAcumulativo(urlTestRealizados);
+			lodaDataService.loadTestCovid(urlTestRealizados);
 			emailService.senderEmial("TEST REALIZADOS IMPORTACION AUTOMATICA OK");
 			logger.info("FIN - loadScheduleTestRealizados");
 		} catch (Exception e) {
