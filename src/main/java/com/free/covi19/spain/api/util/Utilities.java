@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Utilities {
 
-	private static String patternDate = "MM/dd/yyyy HH:mm:ss";
+	private static String patternDate = "dd/MM/yyyy HH:mm:ss";
 
 	public static String currentDateString() {
 		DateFormat df = new SimpleDateFormat(patternDate);
