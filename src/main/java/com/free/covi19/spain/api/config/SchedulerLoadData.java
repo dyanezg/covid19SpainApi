@@ -4,8 +4,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.CacheManager;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.free.covi19.spain.api.email.EmailService;
@@ -28,7 +26,7 @@ public class SchedulerLoadData {
 	@Autowired
 	LoadDataService lodaDataService;
 
-	@Scheduled(cron = "0 0 */8 * * *", zone = "Europe/Madrid")
+	//@Scheduled(cron = "0 0 */8 * * *", zone = "Europe/Madrid")
 	public void loadScheduleModeloAcumulativo() throws Exception {
 
 		try {
@@ -42,7 +40,7 @@ public class SchedulerLoadData {
 
 	}
 
-	@Scheduled(cron = "0 0 */7 * * *", zone = "Europe/Madrid")
+	//@Scheduled(cron = "0 0 */7 * * *", zone = "Europe/Madrid")
 	public void loadScheduleTestRealizados() throws Exception {
 
 		try {

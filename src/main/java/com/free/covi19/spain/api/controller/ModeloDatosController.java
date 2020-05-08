@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,6 @@ public class ModeloDatosController {
 	@Autowired
 	LoadDataService lodaDataService;
 
-
 	@Autowired
 	EmailService emailService;
 
@@ -33,8 +31,10 @@ public class ModeloDatosController {
 
 	@GetMapping("/modeloAcumulativo")
 	public String loadModeloAcumulativo() {
-		try {
-			return lodaDataService.loadModeloAcumulativo(urlAcumulativo);
+		try {			
+			String returnValue =  lodaDataService.loadModeloAcumulativo(urlAcumulativo);
+			emailService.senderEmial("MODELO ACUMULATIVO IMPORTACION CRON OK");
+			return returnValue; 
 		} catch (Exception e) {
 			emailService.senderEmial(e.getMessage());
 			return "ko";
@@ -44,7 +44,9 @@ public class ModeloDatosController {
 	@GetMapping("/testRealizados")
 	public String loadTestRealizados() {
 		try {
-			return lodaDataService.loadTestCovid(urlTestRealizados);
+			String returnValue = lodaDataService.loadTestCovid(urlTestRealizados); 			
+			emailService.senderEmial("TEST REALIZADOS IMPORTACION CRON OK");
+			return returnValue; 
 		} catch (Exception e) {
 			emailService.senderEmial(e.getMessage());
 			return "ko";
