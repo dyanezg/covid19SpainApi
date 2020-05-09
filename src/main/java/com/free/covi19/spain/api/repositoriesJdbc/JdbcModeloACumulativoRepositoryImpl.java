@@ -48,7 +48,8 @@ public class JdbcModeloACumulativoRepositoryImpl implements JdbcModeloAcumulativ
 			            public int getBatchSize() {
 			                return modeloAcumulativoDtoList.size();
 			            }
-			        });				
+			        });				 		 
+		 
 	}
 
 	

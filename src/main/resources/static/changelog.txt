@@ -39,3 +39,9 @@ Version 1.2.5.RELEASE (07-05-2020)
 Version 1.2.6.RELEASE (08-05-2020)
 =============================
 * disable sheduler Task, delegamos en crontab
+
+
+=============================
+Version 1.2.7.RELEASE (09-05-2020)
+=============================
+* fix cambio url https://cnecovid.isciii.es/ modelo acumulativo
