@@ -28,7 +28,7 @@ public class TestRealizados {
 	
 	private Integer totalPruebas;
 
-	private String fechaImportacion;
+	private String fechaImportacion;	
 	
 
 	public Integer getId() {

@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -14,13 +13,17 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.free.covi19.spain.api.dto.AfectadosEdadSexoDto;
+import com.free.covi19.spain.api.dto.CcaaMascarillasDto;
 import com.free.covi19.spain.api.dto.ModeloAcumulativoDto;
 import com.free.covi19.spain.api.dto.TestRealizadoDto;
 import com.free.covi19.spain.api.email.EmailService;
 import com.free.covi19.spain.api.exception.LoadDataServiceException;
+import com.free.covi19.spain.api.repositoriesJdbc.JdbcCcaaMascarillasRepository;
 import com.free.covi19.spain.api.repositoriesJdbc.JdbcModeloAcumulativoRepository;
+import com.free.covi19.spain.api.repositoriesJdbc.JdbcAfectadosEdadSexoRepository;
 import com.free.covi19.spain.api.repositoriesJdbc.JdbcTestRealizadosRepository;
-import com.free.covi19.spain.api.util.ComunidadAutonomaEnum;
+import com.free.covi19.spain.api.util.MapperCsv;
 
 
 @Service
@@ -30,28 +33,36 @@ public class LodaDataServiceImpl implements LoadDataService {
 	
 	@Autowired
 	JdbcModeloAcumulativoRepository jdbcModeloAcumulativoRepository;
-	
-	@Autowired
-	EmailService emailService;
-	
+
 	@Autowired
 	JdbcTestRealizadosRepository jdbcTestRealizadosRepository;
 	
+	@Autowired
+	JdbcCcaaMascarillasRepository jdbcCcaaMascarillasRepository;
 	
-	static int counter=0;
+	@Autowired
+	JdbcAfectadosEdadSexoRepository jdbcAfectadosEdadSexoRepository;
+	
+	@Autowired
+	EmailService emailService;	
+			
+	@Autowired
+	MapperCsv mapperCsv;
 		
-
 	@Transactional(rollbackOn = { Exception.class })
 	public String loadModeloAcumulativo(String url) throws Exception {
 
 		List<ModeloAcumulativoDto> modeloAcumulativoDtoList = new ArrayList<ModeloAcumulativoDto>();
-		counter = 0;
+		Integer totalInsert = 0;
+		mapperCsv.setCounter(0);	
 
 		try {
-
+				
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"));
 
-			modeloAcumulativoDtoList = br.lines().skip(1).map(mapModeloAcumulativoDto).collect(Collectors.toList());
+			modeloAcumulativoDtoList = br.lines().skip(1).map(mapperCsv.mapModeloAcumulativoDto)
+					.collect(Collectors.toList());
 			br.close();
 
 			modeloAcumulativoDtoList.removeIf(o -> o.getCcaa() == null);
@@ -61,12 +72,17 @@ public class LodaDataServiceImpl implements LoadDataService {
 				jdbcModeloAcumulativoRepository.batchInsert(modeloAcumulativoDtoList);
 			}
 
+			totalInsert = modeloAcumulativoDtoList.size();
+
+			if (totalInsert <= 0) {
+				logger.severe("ERROR - loadModeloAcumulativo: 0 registros importados");
+				throw new LoadDataServiceException("ERROR - loadModeloAcumulativo: 0 registros importados");
+			}
+
 		} catch (Exception e) {
 			logger.severe("ERROR - loadModeloAcumulativo: " + e.getMessage());
 			throw new LoadDataServiceException(e.getMessage());
 		}
-
-		Integer totalInsert = modeloAcumulativoDtoList.size();
 
 		return "ok. Total Insertados: " + totalInsert.toString();
 
@@ -77,13 +93,15 @@ public class LodaDataServiceImpl implements LoadDataService {
 	public String loadTestCovid(String url) throws Exception {
 
 		List<TestRealizadoDto> testRealizadoDtoList = new ArrayList<TestRealizadoDto>();
-		counter = 0;
-
+		Integer totalInsert = 0;
+		mapperCsv.setCounter(0);	
+		
 		try {
-
+			
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"));
 
-			testRealizadoDtoList = br.lines().skip(1).map(mapTestRealizadoDto).collect(Collectors.toList());
+			testRealizadoDtoList = br.lines().skip(1).map(mapperCsv.mapTestRealizadoDto).collect(Collectors.toList());
 			br.close();
 
 			testRealizadoDtoList.removeIf(o -> o.getCcaa() == null);
@@ -93,93 +111,105 @@ public class LodaDataServiceImpl implements LoadDataService {
 				jdbcTestRealizadosRepository.batchInsert(testRealizadoDtoList);
 			}
 
+			
+			totalInsert = testRealizadoDtoList.size();
+			
+			if (totalInsert <= 0) {
+				logger.severe("ERROR - loadTestCovid: 0 registros importados");
+				throw new LoadDataServiceException("ERROR - loadTestCovid: 0 registros importados");
+			}
+
 		} catch (Exception e) {
 			logger.severe("ERROR - loadTestCovid: " + e.getMessage());
 			throw new LoadDataServiceException(e.getMessage());
 		}
 
-		Integer totalInsert = testRealizadoDtoList.size();
 		return "ok. Total Insertados: " + totalInsert.toString();
 
 	}
 	
-
-	private Function<String, ModeloAcumulativoDto> mapModeloAcumulativoDto = (line) -> {
-		String[] p = line.split("\\,", -1);
-		
-		ModeloAcumulativoDto modeloAcumulativoDto = new ModeloAcumulativoDto();
-
-		if (p[0].trim().length() == 2) {
-
-			try {
-
-				modeloAcumulativoDto.setId(counter++);
-				modeloAcumulativoDto.setCcaa(p[0]);
-				modeloAcumulativoDto.setFecha(p[1]);
-
-				if (p[2] != null && p[2].trim().length() > 0) {
-					modeloAcumulativoDto.setCasos(Integer.parseInt(p[2]));
-				} else {
-					modeloAcumulativoDto.setCasos(0);
-				}
-
-				if (p[5] != null && p[5].trim().length() > 0) {
-					modeloAcumulativoDto.setHospitalizados(Integer.parseInt(p[5]));
-				} else {
-					modeloAcumulativoDto.setHospitalizados(0);
-				}
-
-				if (p[6] != null && p[6].trim().length() > 0) {
-					modeloAcumulativoDto.setUci(Integer.parseInt(p[6]));
-				} else {
-					modeloAcumulativoDto.setUci(0);
-				}
-
-				if (p[8] != null && p[8].trim().length() > 0) {
-					modeloAcumulativoDto.setFallecidos(Integer.parseInt(p[8]));
-				} else {
-					modeloAcumulativoDto.setFallecidos(0);
-				}
-
-				if (p[7] != null && p[7].trim().length() > 0) {
-					modeloAcumulativoDto.setRecuperados(Integer.parseInt(p[7]));
-				} else {
-					modeloAcumulativoDto.setRecuperados(0);
-				}
-
-			} catch (Exception e) {
-				logger.severe("Error al parsear modeloAcumulativoDto: " + modeloAcumulativoDto.toString());
-				emailService.senderEmial("Error al parsear el csv, linea: " + modeloAcumulativoDto.toString());
-			}
-
-		}
-
-		return modeloAcumulativoDto;
-	};
 	
-	
-	private  Function<String, TestRealizadoDto> mapTestRealizadoDto = (line) -> {
-		String[] p = line.split("\\,", -1);
-		
-		TestRealizadoDto testRealizadoDto = new TestRealizadoDto();
+	/**
+	 * Nuevo
+	 */
+	@Transactional(rollbackOn = { Exception.class })
+	public String loadCcaaMascarillas(String url) throws Exception {
+
+		List<CcaaMascarillasDto> ccaaMascarillasDtoList = new ArrayList<CcaaMascarillasDto>();
+		Integer totalInsert = 0;
+		mapperCsv.setCounter(0);	
 		
 		try {
-
-			testRealizadoDto.setId(counter++);
-			testRealizadoDto.setFecha(p[0]);
-			testRealizadoDto.setCcaa( ComunidadAutonomaEnum.fromCodIni(p[1]).getCcaa());
-			testRealizadoDto.setPcr(Integer.parseInt(p[3]));
-			testRealizadoDto.setTestAnticuerpos(Integer.parseInt(p[5]));			
-			testRealizadoDto.setTotalPruebas(Integer.parseInt(p[7]));			
-															
-		} catch (Exception e) {
-			logger.severe("Error al parsear testRealizadoDto: " + testRealizadoDto.toString());
-			emailService.senderEmial("Error al parsear el csv, linea: " + testRealizadoDto.toString());
-		}
 			
-		
-		return testRealizadoDto;
-	};
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"));
 
+			ccaaMascarillasDtoList = br.lines().skip(1).map(mapperCsv.mapCcaaMascarillas).collect(Collectors.toList());
+			br.close();
+
+			ccaaMascarillasDtoList.removeIf(o -> o.getCcaa() == null);
+
+			if (!ccaaMascarillasDtoList.isEmpty()) {
+				jdbcCcaaMascarillasRepository.delelteAll();
+				jdbcCcaaMascarillasRepository.batchInsert(ccaaMascarillasDtoList);
+			}
+
+			
+			totalInsert = ccaaMascarillasDtoList.size();
+			
+			if (totalInsert <= 0) {
+				logger.severe("ERROR - loadCcaaMascarillas: 0 registros importados");
+				throw new LoadDataServiceException("ERROR - loadCcaaMascarillas: 0 registros importados");
+			}
+
+		} catch (Exception e) {
+			logger.severe("ERROR - loadCcaaMascarillas: " + e.getMessage());
+			throw new LoadDataServiceException(e.getMessage());
+		}
+
+		return "ok. Total Insertados: " + totalInsert.toString();
+
+	}
+	
+	
+
+	@Transactional(rollbackOn = { Exception.class })
+	public String loadAfectadosEdadSexo(String url) throws Exception {
+
+		List<AfectadosEdadSexoDto> afectadosEdadSexoDtoList = new ArrayList<AfectadosEdadSexoDto>();
+		Integer totalInsert = 0;
+		mapperCsv.setCounter(0);	
+		
+		try {
+			
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"));
+
+			afectadosEdadSexoDtoList = br.lines().skip(1).map(mapperCsv.mapAfectadosEdadSexo).collect(Collectors.toList());
+			br.close();
+
+
+			if (!afectadosEdadSexoDtoList.isEmpty()) {
+				jdbcAfectadosEdadSexoRepository.delelteAll();
+				jdbcAfectadosEdadSexoRepository.batchInsert(afectadosEdadSexoDtoList);
+			}
+
+			
+			totalInsert = afectadosEdadSexoDtoList.size();
+			
+			if (totalInsert <= 0) {
+				logger.severe("ERROR - loadAfectadosEdadSexo: 0 registros importados");
+				throw new LoadDataServiceException("ERROR - loadAfectadosEdadSexo: 0 registros importados");
+			}
+
+		} catch (Exception e) {
+			logger.severe("ERROR - loadAfectadosEdadSexo: " + e.getMessage());
+			throw new LoadDataServiceException(e.getMessage());
+		}
+
+		return "ok. Total Insertados: " + totalInsert.toString();
+
+	}
+	
 	
 }

@@ -8,15 +8,19 @@ Version 1.0.RELEASE (29-04-2020)
 *datos de comunidades autonomas
 *modelo acumulativo https://datos.gob.es/
 
+
 =============================
 Version 1.1.RELEASE (30-04-2020)
 =============================
 *eliminamos historico de modelos
 
+
 =============================
 Version 1.2.RELEASE (01-05-2020)
 =============================
 *nuevo modelo test realizados -> https://github.com/datadista/datasets/
+	-Número acumulado de test PCR y test de anticuerpos realizados por comunidad autonoma hasta el 2020-04-23.
+
 
 =============================
 Version 1.2.3.RELEASE (02-05-2020)
@@ -45,3 +49,15 @@ Version 1.2.6.RELEASE (08-05-2020)
 Version 1.2.7.RELEASE (09-05-2020)
 =============================
 * fix cambio url https://cnecovid.isciii.es/ modelo acumulativo
+
+
+=============================
+Version 1.3.0.RELEASE (17-05-2020)
+=============================
+* nuevo modelo de datos ccaaMascarillas -> https://github.com/datadista/datasets/
+	-Número acumulado de mascarillas repartidas por CCAA por el Ministerio de Sanidad desde 2020-03-10 a 2020-03-22.
+
+* nuevo modelo de datos afectadosEdadSexo -> https://github.com/datadista/datasets/
+	-Datos obtenidos sobre los casos notificados con informacion de edad y sexo. Dataset 
+	 con las notas de los casos analizados cada dia por rango de edad y sexo
+	 https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/nota_nacional_covid_19_rango_edad.csv 

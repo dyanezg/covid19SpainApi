@@ -28,12 +28,18 @@ public class ModeloDatosController {
 
 	@Value("${url.test.realizados}")
 	private String urlTestRealizados;
+	
+	@Value("${url.afectados}")
+	private String urlAfectados;
+	
+	@Value("${url.ccaaMascarillas}")
+	private String urlccaaMascarillas;
 
 	@GetMapping("/modeloAcumulativo")
 	public String loadModeloAcumulativo() {
 		try {			
 			String returnValue =  lodaDataService.loadModeloAcumulativo(urlAcumulativo);
-			emailService.senderEmial("MODELO ACUMULATIVO IMPORTACION CRON OK");
+			//emailService.senderEmial("MODELO ACUMULATIVO IMPORTACION CRON OK");
 			return returnValue; 
 		} catch (Exception e) {
 			emailService.senderEmial(e.getMessage());
@@ -45,7 +51,33 @@ public class ModeloDatosController {
 	public String loadTestRealizados() {
 		try {
 			String returnValue = lodaDataService.loadTestCovid(urlTestRealizados); 			
-			emailService.senderEmial("TEST REALIZADOS IMPORTACION CRON OK");
+			//emailService.senderEmial("TEST REALIZADOS IMPORTACION CRON OK");
+			return returnValue; 
+		} catch (Exception e) {
+			emailService.senderEmial(e.getMessage());
+			return "ko";
+		}
+	}
+	
+	
+	@GetMapping("/afectadosEdadSexo")
+	public String loadRangoDeEdad() {
+		try {
+			String returnValue = lodaDataService.loadAfectadosEdadSexo(urlAfectados); 			
+			//emailService.senderEmial("AFECTADOS_EDAD_SEXO IMPORTACION CRON OK");
+			return returnValue; 
+		} catch (Exception e) {
+			emailService.senderEmial(e.getMessage());
+			return "ko";
+		}
+	}
+	
+	
+	@GetMapping("/ccaaMascarillas")
+	public String loadCcaaMascarillas() {
+		try {
+			String returnValue = lodaDataService.loadCcaaMascarillas(urlccaaMascarillas); 			
+			//emailService.senderEmial("CCAA_MASCARILLAS IMPORTACION CRON OK");
 			return returnValue; 
 		} catch (Exception e) {
 			emailService.senderEmial(e.getMessage());

@@ -6,8 +6,12 @@ import org.springframework.data.rest.core.mapping.ExposureConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 
+import com.free.covi19.spain.api.model.AfectadosEdadSexo;
+import com.free.covi19.spain.api.model.CcaaMascarillas;
 import com.free.covi19.spain.api.model.ComunidadAutonoma;
 import com.free.covi19.spain.api.model.ModeloAcumulativo;
+import com.free.covi19.spain.api.model.RangoDeEdad;
+import com.free.covi19.spain.api.model.Sexo;
 import com.free.covi19.spain.api.model.TestRealizados;
 
 @Configuration
@@ -21,5 +25,10 @@ public class RestConfig implements RepositoryRestConfigurer {
         config.forDomainType(ComunidadAutonoma.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
         config.forDomainType(ModeloAcumulativo.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
         config.forDomainType(TestRealizados.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+        config.forDomainType(CcaaMascarillas.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+        config.forDomainType(AfectadosEdadSexo.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+        config.forDomainType(Sexo.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+        config.forDomainType(RangoDeEdad.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+
     }
 }

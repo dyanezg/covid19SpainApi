@@ -22,7 +22,30 @@ VALUES
 ("ES", "España");
 
 
+INSERT INTO rango_de_edad (cod, cod_name)
+VALUES
+(1,"0-9"),	
+(2,"10-19"),	
+(3,"20-29"),	
+(4,"30-39"),
+(5,"40-49"),
+(6,"50-59"),
+(7,"60-69"),
+(8,"70-79"),	
+(9,"80-89"),
+(10,"80+"),
+(11,"90+"),
+(12,"TOTAL");
+	
 
+INSERT INTO sexo (cod, cod_name)
+VALUES
+(1,"ambos"),	
+(2,"hombres"),	
+(3,"mujeres");	
+
+
+/*
 INSERT INTO modelo_acumulativo (id,casos,fallecidos,fecha,fecha_importacion,hospitalizados,recuperados,uci,ccaa) VALUES (
 2,0,0,"20/02/2020","12/04/2020",0,0,0,"AN");
 INSERT INTO modelo_acumulativo (id,casos,fallecidos,fecha,fecha_importacion,hospitalizados,recuperados,uci,ccaa) VALUES (
@@ -1961,3 +1984,5 @@ INSERT INTO modelo_acumulativo (id,casos,fallecidos,fecha,fecha_importacion,hosp
 969,10515,765,"10/04/2020","12/04/2020",5402,4741,453,"PV");
 INSERT INTO modelo_acumulativo (id,casos,fallecidos,fecha,fecha_importacion,hospitalizados,recuperados,uci,ccaa) VALUES (
 970,3223,207,"10/04/2020","12/04/2020",1082,1337,73,"RI");
+*/
+
