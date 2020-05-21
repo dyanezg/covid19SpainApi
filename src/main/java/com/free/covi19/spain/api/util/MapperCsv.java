@@ -57,17 +57,19 @@ public class MapperCsv {
 					modeloAcumulativoDto.setUci(0);
 				}
 
-				if (p[8] != null && p[8].trim().length() > 0) {
-					modeloAcumulativoDto.setFallecidos(Integer.parseInt(p[8]));
+				if (p[7] != null && p[7].trim().length() > 0) {
+					modeloAcumulativoDto.setFallecidos(Integer.parseInt(p[7]));
 				} else {
 					modeloAcumulativoDto.setFallecidos(0);
 				}
-
-				if (p[7] != null && p[7].trim().length() > 0) {
-					modeloAcumulativoDto.setRecuperados(Integer.parseInt(p[7]));
-				} else {
-					modeloAcumulativoDto.setRecuperados(0);
-				}
+				
+				//TODO han quitado los recuperados
+//				if (p[8] != null && p[8].trim().length() > 0) {
+//					modeloAcumulativoDto.setRecuperados(Integer.parseInt(p[8]));
+//				} else {
+//					modeloAcumulativoDto.setRecuperados(0);
+//				}
+				
 
 			} catch (Exception e) {
 				logger.severe("Error al parsear modeloAcumulativoDto: " + Arrays.toString(p));
