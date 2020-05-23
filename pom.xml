@@ -11,7 +11,7 @@
 
 	<groupId>com.free.covi19.spain.api</groupId>
 	<artifactId>covid19SpainApi</artifactId>
-	<version>1.3.0.RELSEASE</version>
+	<version>1.3.1.RELSEASE</version>
 	<name>covid19SpainApi</name>
 	<description>Free Api Covid19 Spain</description>
 
@@ -61,6 +61,7 @@
 			<artifactId>sqlite-jdbc</artifactId>
 		</dependency>
 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -73,7 +74,6 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
 
 
 	<repositories>

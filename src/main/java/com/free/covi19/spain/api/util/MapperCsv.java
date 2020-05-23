@@ -27,7 +27,7 @@ public class MapperCsv {
 				
 
 	public Function<String, ModeloAcumulativoDto> mapModeloAcumulativoDto = (line) -> {
-		String[] p = line.split("\\,", -1);
+		String[] p = line.split("\\, ", -1);
 		
 		ModeloAcumulativoDto modeloAcumulativoDto = new ModeloAcumulativoDto();
 
@@ -63,17 +63,12 @@ public class MapperCsv {
 					modeloAcumulativoDto.setFallecidos(0);
 				}
 				
-				//TODO han quitado los recuperados
-//				if (p[8] != null && p[8].trim().length() > 0) {
-//					modeloAcumulativoDto.setRecuperados(Integer.parseInt(p[8]));
-//				} else {
-//					modeloAcumulativoDto.setRecuperados(0);
-//				}
-				
+
 
 			} catch (Exception e) {
 				logger.severe("Error al parsear modeloAcumulativoDto: " + Arrays.toString(p));
 				emailService.senderEmial("Error al parsear el csv, linea: " + Arrays.toString(p));
+				throw e;
 			}
 
 		}
@@ -84,7 +79,8 @@ public class MapperCsv {
 
 		
 	public  Function<String, TestRealizadoDto> mapTestRealizadoDto = (line) -> {
-		String[] p = line.split("\\,", -1);
+		//Regex 222,22,333,"24,2",34343
+		String[] p = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 		
 		TestRealizadoDto testRealizadoDto = new TestRealizadoDto();
 		
@@ -116,6 +112,7 @@ public class MapperCsv {
 		} catch (Exception e) {
 			logger.severe("Error al parsear testRealizadoDto: " + Arrays.toString(p));
 			emailService.senderEmial("Error al parsear el csv, linea: " + Arrays.toString(p));
+			throw e;
 		}
 			
 		
@@ -141,6 +138,7 @@ public class MapperCsv {
 		} catch (Exception e) {
 			logger.severe("Error al parsear ccaaMascarillasDto: " + Arrays.toString(p));
 			emailService.senderEmial("Error al parsear el csv, linea: " + Arrays.toString(p));
+			throw e;
 		}
 			
 		
@@ -168,6 +166,7 @@ public class MapperCsv {
 		} catch (Exception e) {
 			logger.severe("Error al parsear afectadosEdadSexoDto: " + Arrays.toString(p));
 			emailService.senderEmial("Error al parsear el csv, linea: " + Arrays.toString(p));
+			throw e;
 		}
 			
 		
