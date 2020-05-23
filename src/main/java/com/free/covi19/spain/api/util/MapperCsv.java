@@ -27,7 +27,7 @@ public class MapperCsv {
 				
 
 	public Function<String, ModeloAcumulativoDto> mapModeloAcumulativoDto = (line) -> {
-		String[] p = line.split("\\, ", -1);
+		String[] p = line.split("\\,", -1);
 		
 		ModeloAcumulativoDto modeloAcumulativoDto = new ModeloAcumulativoDto();
 
