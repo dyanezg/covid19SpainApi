@@ -81,7 +81,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 
 		} catch (Exception e) {
 			logger.severe("ERROR - loadModeloAcumulativo: " + e.getMessage());
-			throw new LoadDataServiceException("ERROR - loadModeloAcumulativo");
+			throw new LoadDataServiceException("ERROR - loadModeloAcumulativo: " + e.getMessage());
 		}
 
 		return "ok. Total Insertados: " + totalInsert.toString();
@@ -121,7 +121,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 
 		} catch (Exception e) {
 			logger.severe("ERROR - loadTestCovid: " + e.getMessage());
-			throw new LoadDataServiceException("ERROR - loadTestCovid");
+			throw new LoadDataServiceException("ERROR - loadTestCovid: " + e.getMessage());
 		}
 
 		return "ok. Total Insertados: " + totalInsert.toString();
@@ -164,7 +164,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 
 		} catch (Exception e) {
 			logger.severe("ERROR - loadCcaaMascarillas: " + e.getMessage());
-			throw new LoadDataServiceException("ERROR - loadCcaaMascarillas");
+			throw new LoadDataServiceException("ERROR - loadCcaaMascarillas: " + e.getMessage());
 		}
 
 		return "ok. Total Insertados: " + totalInsert.toString();
@@ -204,7 +204,7 @@ public class LodaDataServiceImpl implements LoadDataService {
 
 		} catch (Exception e) {
 			logger.severe("ERROR - loadAfectadosEdadSexo: " + e.getMessage());
-			throw new LoadDataServiceException("ERROR - loadAfectadosEdadSexo");
+			throw new LoadDataServiceException("ERROR - loadAfectadosEdadSexo: " + e.getMessage());
 		}
 
 		return "ok. Total Insertados: " + totalInsert.toString();
