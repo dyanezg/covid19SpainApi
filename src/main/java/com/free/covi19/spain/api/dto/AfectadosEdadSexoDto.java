@@ -18,8 +18,6 @@ public class AfectadosEdadSexoDto {
 
 	private Integer fallecidos;
 
-	private String fechaImportacion;
-
 	public Integer getId() {
 		return id;
 	}
@@ -74,9 +72,7 @@ public class AfectadosEdadSexoDto {
 
 	public void setIngresosUci(Integer ingresosUci) {
 		this.ingresosUci = ingresosUci;
-	}
-
-	
+	}	
 
 	public Integer getFallecidos() {
 		return fallecidos;
@@ -86,16 +82,5 @@ public class AfectadosEdadSexoDto {
 		this.fallecidos = fallecidos;
 	}
 
-	public String getFechaImportacion() {
-		return fechaImportacion;
-	}
-
-	public void setFechaImportacion(String fechaImportacion) {
-		this.fechaImportacion = fechaImportacion;
-	}
-
-	
-	
-	
 	
 }

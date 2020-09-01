@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.free.covi19.spain.api.dto.AfectadosEdadSexoDto;
 import com.free.covi19.spain.api.dto.CcaaMascarillasDto;
+import com.free.covi19.spain.api.dto.FallecidosDto;
 import com.free.covi19.spain.api.dto.ModeloAcumulativoDto;
 import com.free.covi19.spain.api.dto.TestRealizadoDto;
 import com.free.covi19.spain.api.email.EmailService;
@@ -120,28 +121,27 @@ public class MapperCsv {
 	};
 
 	
-	public  Function<String, CcaaMascarillasDto> mapCcaaMascarillas = (line) -> {
+	public Function<String, CcaaMascarillasDto> mapCcaaMascarillas = (line) -> {
 		String[] p = line.split("\\,", -1);
-		
+
 		CcaaMascarillasDto ccaaMascarillasDto = new CcaaMascarillasDto();
-		
+
 		try {
 
 			if (!"".equals(p[1].trim())) {
-				
+
 				ccaaMascarillasDto.setId(counter++);
 				ccaaMascarillasDto.setFecha(p[0]);
-				ccaaMascarillasDto.setCcaa( ComunidadAutonomaEnum.fromCodIni(p[1]).getCcaa());
+				ccaaMascarillasDto.setCcaa(ComunidadAutonomaEnum.fromCodIni(p[1]).getCcaa());
 				ccaaMascarillasDto.setAcumulado(Integer.parseInt(p[3]));
 			}
-															
+
 		} catch (Exception e) {
 			logger.severe("Error al parsear ccaaMascarillasDto: " + Arrays.toString(p));
 			emailService.senderEmial("Error al parsear el csv, linea: " + Arrays.toString(p));
 			throw e;
 		}
-			
-		
+
 		return ccaaMascarillasDto;
 	};
 	
@@ -175,6 +175,30 @@ public class MapperCsv {
 	
 	
 
+	@Deprecated
+	public Function<String, FallecidosDto> mapFallecidos = (line) -> {
+		String[] p = line.split("\\,", -1);
+
+		FallecidosDto fallecidosDto = new FallecidosDto();
+
+		try {
+
+			fallecidosDto.setId(counter++);
+			fallecidosDto.setFecha(p[0]);
+			fallecidosDto.setCcaa(ComunidadAutonomaEnum.fromCodIni(p[1]).getCcaa());
+			fallecidosDto.setNum(Integer.parseInt(p[3]));
+
+		} catch (Exception e) {
+			logger.severe("Error al parsear fallecidosDto: " + Arrays.toString(p));
+			emailService.senderEmial("Error al parsear el csv, linea: " + Arrays.toString(p));
+			throw e;
+		}
+
+		return fallecidosDto;
+	};
+
+	
+	
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}

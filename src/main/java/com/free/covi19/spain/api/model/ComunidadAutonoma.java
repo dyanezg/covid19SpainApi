@@ -36,6 +36,10 @@ public class ComunidadAutonoma implements Serializable{
     @OneToMany(mappedBy="comunidadAutonoma")
     private List<CcaaMascarillas> ccaaMascarillas;
     
+    
+    @OneToMany(mappedBy="comunidadAutonoma")
+    private List<Fallecidos> fallecidos;
+    
          
 	public String getNombre() {
 		return nombre;

@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import com.free.covi19.spain.api.model.AfectadosEdadSexo;
 import com.free.covi19.spain.api.model.CcaaMascarillas;
 import com.free.covi19.spain.api.model.ComunidadAutonoma;
+import com.free.covi19.spain.api.model.Fallecidos;
 import com.free.covi19.spain.api.model.ModeloAcumulativo;
 import com.free.covi19.spain.api.model.RangoDeEdad;
 import com.free.covi19.spain.api.model.Sexo;
@@ -29,6 +30,8 @@ public class RestConfig implements RepositoryRestConfigurer {
         config.forDomainType(AfectadosEdadSexo.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
         config.forDomainType(Sexo.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
         config.forDomainType(RangoDeEdad.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+        config.forDomainType(Fallecidos.class).withItemExposure((metadata, httpMethods) -> httpMethods.disable(httpMethodArray));
+
 
     }
 }

@@ -33,8 +33,12 @@ public class ModeloDatosController {
 	private String urlAfectados;
 	
 	@Value("${url.ccaaMascarillas}")
-	private String urlccaaMascarillas;
+	private String urlCcaaMascarillas;
 
+	@Value("${url.fallecidos}")
+	private String urlFallecidos;
+	
+	
 	@GetMapping("/modeloAcumulativo")
 	public String loadModeloAcumulativo() {
 		try {			
@@ -76,7 +80,7 @@ public class ModeloDatosController {
 	@GetMapping("/ccaaMascarillas")
 	public String loadCcaaMascarillas() {
 		try {
-			String returnValue = lodaDataService.loadCcaaMascarillas(urlccaaMascarillas); 			
+			String returnValue = lodaDataService.loadCcaaMascarillas(urlCcaaMascarillas); 			
 			//emailService.senderEmial("CCAA_MASCARILLAS IMPORTACION CRON OK");
 			return returnValue; 
 		} catch (Exception e) {
@@ -85,5 +89,19 @@ public class ModeloDatosController {
 		}
 	}
 
+	
+	@GetMapping("/fallecidos")
+	public String loadFallecidos() {
+		try {
+			String returnValue = lodaDataService.loadFallecidos(urlFallecidos); 			
+			//emailService.senderEmial("CCAA_MASCARILLAS IMPORTACION CRON OK");
+			return returnValue; 
+		} catch (Exception e) {
+			emailService.senderEmial(e.getMessage());
+			return "ko";
+		}
+	}
+	
+	
 
 }

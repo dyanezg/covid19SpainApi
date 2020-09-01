@@ -10,6 +10,6 @@ public interface LoadDataService {
 	
 	public String loadCcaaMascarillas(String url) throws Exception;
 
-
+	public String loadFallecidos(String url) throws Exception;
 	
 }
