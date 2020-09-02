@@ -19,7 +19,7 @@ Version 1.1.RELEASE (30-04-2020)
 Version 1.2.RELEASE (01-05-2020)
 =============================
 *nuevo modelo test realizados -> https://github.com/datadista/datasets/
-	-Número acumulado de test PCR y test de anticuerpos realizados por comunidad autonoma hasta el 2020-04-23.
+	-num acumulado de test PCR y test de anticuerpos realizados por comunidad autonoma hasta el 2020-04-23.
 
 
 =============================
