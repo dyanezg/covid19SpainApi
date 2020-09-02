@@ -80,8 +80,8 @@ public class MapperCsv {
 
 		
 	public  Function<String, TestRealizadoDto> mapTestRealizadoDto = (line) -> {
-		//Regex 222,22,333,"24,2",34343
-		String[] p = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+		//Regex 222;22;333;"24,2";34343
+		String[] p = line.split(";(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 		
 		TestRealizadoDto testRealizadoDto = new TestRealizadoDto();
 		
@@ -91,20 +91,20 @@ public class MapperCsv {
 			testRealizadoDto.setFecha(p[0]);						
 			testRealizadoDto.setCcaa( ComunidadAutonomaEnum.fromCodIni(p[1]).getCcaa());
 			
-			if (p[3] != null && p[3].trim().length() > 0) {
-				testRealizadoDto.setPcr(Integer.parseInt(p[3].replace(".", "")));
+			if (p[3] != null && p[4].trim().length() > 0) {
+				testRealizadoDto.setPcr(Integer.parseInt(p[4].replace(".", "")));
 			} else {
 				testRealizadoDto.setPcr(0);
 			}
 			
-			if (p[5] != null && p[5].trim().length() > 0) {
-				testRealizadoDto.setTestAnticuerpos(Integer.parseInt(p[5].replace(".", "")));
+			if (p[6] != null && p[6].trim().length() > 0) {
+				testRealizadoDto.setTestAnticuerpos(Integer.parseInt(p[6].replace(".", "")));
 			} else {
 				testRealizadoDto.setTestAnticuerpos(0);
 			}
 
-			if (p[7] != null && p[7].trim().length() > 0) {
-				testRealizadoDto.setTotalPruebas(Integer.parseInt(p[7].replace(".", "")));
+			if (p[10] != null && p[10].trim().length() > 0) {
+				testRealizadoDto.setTotalPruebas(Integer.parseInt(p[10].replace(".", "")));
 			} else {
 				testRealizadoDto.setTotalPruebas(0);
 			}															

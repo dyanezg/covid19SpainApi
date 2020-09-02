@@ -74,4 +74,10 @@ Version 1.4.0.RELEASE (01-09-2020)
 =============================
 * nuevo modelo de datos de fallecidos directamente de mscbs.gob.es
 
+
+=============================
+Version 1.4.1.RELEASE (02-09-2020)
+=============================
+* fix modelo test realizados
+
   	
