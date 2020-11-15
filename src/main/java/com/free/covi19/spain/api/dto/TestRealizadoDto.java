@@ -3,25 +3,23 @@ package com.free.covi19.spain.api.dto;
 import java.io.Serializable;
 
 public class TestRealizadoDto implements Serializable {
-	
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4973138366012900966L;
 
 	private Integer id;
-	
-	private String fecha;
-				
-	private String ccaa;	
-			
-	private Integer pcr;		
-	
-	private Integer testAnticuerpos;
-	
-	private Integer totalPruebas;
 
+	private String fecha;
+
+	private String ccaa;
+
+	private Integer pcr;
+
+	private Integer testAnticuerpos;
+
+	private Integer totalPruebas;
 
 	public Integer getId() {
 		return id;
@@ -76,8 +74,5 @@ public class TestRealizadoDto implements Serializable {
 		return "TestRealizadoDto [id=" + id + ", fecha=" + fecha + ", ccaa=" + ccaa + ", pcr=" + pcr
 				+ ", testAnticuerpos=" + testAnticuerpos + ", totalPruebas=" + totalPruebas + "]";
 	}
-
-					
-	
 
 }

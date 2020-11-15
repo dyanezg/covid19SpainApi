@@ -12,24 +12,23 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class TestRealizados {
-	
+
 	@Id
 	private Integer id;
-	
-	private String fecha;
-	
-	@ManyToOne	
-	@JoinColumn(name="ccaa")
-	private ComunidadAutonoma comunidadAutonoma;	
-			
-	private Integer pcr;		
-	
-	private Integer testAnticuerpos;
-	
-	private Integer totalPruebas;
 
-	private String fechaImportacion;	
-	
+	private String fecha;
+
+	@ManyToOne
+	@JoinColumn(name = "ccaa")
+	private ComunidadAutonoma comunidadAutonoma;
+
+	private Integer pcr;
+
+	private String testAnticuerpos;
+
+	private String totalPruebas;
+
+	private String fechaImportacion;
 
 	public Integer getId() {
 		return id;
@@ -46,7 +45,6 @@ public class TestRealizados {
 	public void setComunidadAutonoma(ComunidadAutonoma comunidadAutonoma) {
 		this.comunidadAutonoma = comunidadAutonoma;
 	}
-	
 
 	public String getFecha() {
 		return fecha;
@@ -64,19 +62,11 @@ public class TestRealizados {
 		this.pcr = pcr;
 	}
 
-	public Integer getTestAnticuerpos() {
-		return testAnticuerpos;
-	}
-
-	public void setTestAnticuerpos(Integer testAnticuerpos) {
-		this.testAnticuerpos = testAnticuerpos;
-	}
-
-	public Integer getTotalPruebas() {
+	public String getTotalPruebas() {
 		return totalPruebas;
 	}
 
-	public void setTotalPruebas(Integer totalPruebas) {
+	public void setTotalPruebas(String totalPruebas) {
 		this.totalPruebas = totalPruebas;
 	}
 
@@ -87,9 +77,13 @@ public class TestRealizados {
 	public void setFechaImportacion(String fechaImportacion) {
 		this.fechaImportacion = fechaImportacion;
 	}
-	
-	
-				
-	
-	    
+
+	public String getTestAnticuerpos() {
+		return testAnticuerpos;
+	}
+
+	public void setTestAnticuerpos(String testAnticuerpos) {
+		this.testAnticuerpos = testAnticuerpos;
+	}
+
 }
